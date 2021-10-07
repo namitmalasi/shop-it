@@ -1,16 +1,37 @@
-import Success from "./pages/Success";
-import Pay from "./pages/Pay";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Register from "./pages/Register";
+import ProductList from "./pages/ProductList";
+import Home from "./pages/Home";
+import Product from "./pages/Product";
+import Login from "./pages/Login";
+import Cart from "./pages/Cart";
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 function App() {
+  const user = true;
   return (
     <Router>
       <Switch>
-        <Route path="/pay">
-          <Pay />
+        <Route exact path="/">
+          <Home />
         </Route>
-        <Route path="/success">
-          <Success />
+        <Route path="/products/:category">
+          <ProductList />
+        </Route>
+        <Route path="/product/:id">
+          <Product />
+        </Route>
+        <Route path="/cart">
+          <Cart />
+        </Route>
+        <Route path="/login">{user ? <Redirect path="/" /> : <Login />}</Route>
+        <Route path="/register">
+          {user ? <Redirect path="/" /> : <Register />}
         </Route>
       </Switch>
     </Router>
